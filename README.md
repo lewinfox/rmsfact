@@ -6,15 +6,18 @@ Display a randomly selected quote about Richard M. Stallman based on the collect
 Octave' function 'fact()' which was aggregated by Jordi Gutiérrez Hermoso based on the (now defunct)
 site stallmanfacts.com (which is accessible only via <http://archive.org>).
 
+# Installation
+
+``` python
+pip install rmsfact
+```
+
 # Usage
 
-The package contains a single class, `RMSFact()` which provides a single method `rmsfact()` which
-takes no arguments and prints a randomly-selected "fact" to the console.
+The package exports a single function `rmsfact()` which returns a single randomly-chosen "fact".
 
 ```python
 import rmsfact
 
-factory = rmsfact.RMSFact()
-
-factory.rmsfact()
+rmsfact.rmsfact()
 ```
