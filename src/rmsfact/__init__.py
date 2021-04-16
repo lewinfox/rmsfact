@@ -33,7 +33,7 @@ class RMSFact(object):
 
     def rmsfact(self):
         idx = random.randint(0, self._n_facts)
-        print(self._facts[idx])
+        return self._facts[idx]
 
 
 if __name__ == "__main__":
