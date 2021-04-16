@@ -11,8 +11,7 @@ class RMSFact(object):
         self._TEXT_FILE = os.path.normpath(f"{DATA_DIR}/rmsfact.txt")
 
         if not os.path.exists(self._BINARY_FILE):
-            self._create_binary_data(
-                infile=self._TEXT_FILE, outfile=self._BINARY_FILE)
+            self._create_binary_data()
 
         with open(self._BINARY_FILE, "rb") as f:
             self._facts = pickle.load(f)
