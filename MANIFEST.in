@@ -1,2 +1,1 @@
-include src/rmsfact/data/rmsfact.txt
-include src/rmsfact/data/rmsfact.dat
+include rmsfact/data/rmsfact.txt
