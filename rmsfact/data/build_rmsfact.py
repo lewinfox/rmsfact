@@ -4,13 +4,14 @@ import pickle
 
 def _build_rmsfact():
     THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+    TEXT_FILE = os.path.normpath(f"{THIS_DIR}/rmsfact.txt")
 
-    with open(f"{THIS_DIR}/rmsfact.txt", "r") as f:
+    with open(TEXT_FILE, "r") as f:
         lines = f.readlines()
         facts = [line.strip("\n")
                  for line in lines if not line.startswith("#")]
 
-    OUTFILE = f"{THIS_DIR}/rmsfact.dat"
+    OUTFILE = os.path.normpath(f"{THIS_DIR}/rmsfact.dat")
 
     with open(OUTFILE, "wb") as f:
         pickle.dump(facts, f)
