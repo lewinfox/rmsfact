@@ -11,3 +11,6 @@ dist/
 __pycache__/
 *.so
 *~
+
+# Don't want to have the .dat file under VCS
+*.dat
