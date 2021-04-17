@@ -1,5 +1,6 @@
 import random
 import os
+import pickle
 
 # Rather than having the `rmsfact()` function parse the source file each time, using a closure like
 # this allows us to offload the parsing and data validation (not that there is any at the moment)
@@ -20,15 +21,13 @@ def _new_rmsfact():
     -------
     function : A function that, when called, returns a random fact.
     """
-    # TODO: Is there a more Pythonic way of referring to the text file?
+    # TODO: Is there a more Pythonic way of referring to the file?
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
     DATA_DIR = os.path.normpath(f"{ROOT_DIR}/data")
-    FACT_FILE = os.path.normpath(f"{DATA_DIR}/rmsfact.txt")
+    FACT_FILE = os.path.normpath(f"{DATA_DIR}/rmsfact.dat")
     # TODO: Error handling needed here?
-    with open(FACT_FILE, "r") as f:
-        lines = f.readlines()
-        facts = [line.strip("\n")
-                 for line in lines if not line.startswith("#")]
+    with open(FACT_FILE, "rb") as f:
+        facts = pickle.load(f)
 
     n_facts = len(facts)
 
