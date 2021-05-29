@@ -10,7 +10,7 @@ site stallmanfacts.com (which is accessible only via <http://archive.org>).
 # Installation
 
 ``` python
-pip install rmsfact
+python -m pip install rmsfact
 ```
 
 
