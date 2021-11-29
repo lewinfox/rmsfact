@@ -33,8 +33,8 @@ def _new_rmsfact() -> Callable:
     """
     # TODO: Is there a more Pythonic way of referring to the file?
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-    DATA_DIR = os.path.normpath(f"{ROOT_DIR}/data")
-    FACT_FILE = os.path.normpath(f"{DATA_DIR}/rmsfact.dat")
+    DATA_DIR = os.path.normpath("{ROOT_DIR}/data".format(ROOT_DIR=ROOT_DIR))
+    FACT_FILE = os.path.normpath("{DATA_DIR}/rmsfact.dat".format(DATA_DIR=DATA_DIR))
     # TODO: Error handling needed here?
     with open(FACT_FILE, "rb") as f:
         facts = pickle.load(f)
