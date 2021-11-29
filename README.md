@@ -73,3 +73,5 @@ make build
 ## Other makefile targets
 
 * `make install_dev`: Install with `pip -e`
+* `make test`: Run unit tests
+* `make clean`: Remove build artifacts
