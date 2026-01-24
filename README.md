@@ -9,8 +9,14 @@ site stallmanfacts.com (which is accessible only via <http://archive.org>).
 
 # Installation
 
-``` python
-python -m pip install rmsfact
+```bash
+uv pip install rmsfact
+```
+
+Or with pip:
+
+```bash
+pip install rmsfact
 ```
 
 
@@ -30,48 +36,49 @@ You can also run `python -m rmsfact` from a shell.
 
 # Building from source
 
-In the event you want to build the package from source, clone the repository...
+This project uses [uv](https://github.com/astral-sh/uv) for dependency management and building.
 
-```
+Clone the repository:
+
+```bash
 git clone https://github.com/lewinfox/rmsfact.git
-```
-
-... `cd` into the project directory...
-
-```
 cd rmsfact
 ```
 
-...and install with `make`
+Install uv if you don't have it:
 
-```
-make install
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-This builds the package and then runs `python -m pip install .`
+Set up the development environment:
+
+```bash
+make install_dev
+```
+
+This will create a virtual environment, install dependencies, and set up the package for development.
 
 
 # Making changes
 
-To add a new fact you can edit `rmsfact/data/rmsfact.txt`.
+To add a new fact you can edit `rmsfact/data/rmsfact.txt`. The text file is read directly when the package is imported, so no build step is needed.
 
-```
+```bash
 echo "A new fact" >> rmsfact/data/rmsfact.txt
 ```
 
-The `Makefile` provides a couple of useful targets, one of which is `make build_binary_data` which
-executes the script `rmsfact/data/build_rms_fact.py` to convert `rmsfact/data/rmsfact.txt` into a
-`.dat` file using `pickle`. This `.dat` file is then read when the package is loaded.
+The `Makefile` provides several useful targets:
 
-Executing `make build` will rebuild the data file and produce the source and binary packages under
-a `dist/` directory. You may need to `python -m pip install build` first.
+* `make install_dev`: Set up development environment with uv
+* `make test`: Run unit tests with pytest
+* `make build`: Build the package (creates source and wheel distributions)
+* `make clean`: Remove build artifacts
+* `make format`: Format code with ruff
+* `make check`: Run linter checks
 
-```
+You can build the package with:
+
+```bash
 make build
 ```
-
-## Other makefile targets
-
-* `make install_dev`: Install with `pip -e`
-* `make test`: Run unit tests
-* `make clean`: Remove build artifacts
