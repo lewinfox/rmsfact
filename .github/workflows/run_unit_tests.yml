@@ -37,5 +37,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Install deps
+        run: uv sync --all-groups
+
       - name: Run tests
         run: make test
