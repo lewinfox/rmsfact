@@ -82,3 +82,37 @@ You can build the package with:
 ```bash
 make build
 ```
+
+
+# Releasing to PyPI
+
+This project uses GitHub Actions to automatically publish to PyPI when you create a new GitHub release.
+
+## First-time setup
+
+You need to configure PyPI's Trusted Publishers feature (one-time setup):
+
+1. Go to [PyPI](https://pypi.org/) and log in to your account
+2. Navigate to your project's settings (or create the project first if it doesn't exist)
+3. Go to the "Publishing" section
+4. Add a new publisher with these settings:
+   - **PyPI Project Name**: `rmsfact`
+   - **Owner**: `lewinfox` (your GitHub username)
+   - **Repository name**: `rmsfact`
+   - **Workflow name**: `publish.yml`
+   - **Environment name**: (leave blank)
+
+## Creating a release
+
+Once trusted publishing is configured, simply create a new GitHub release:
+
+1. Update the version in [pyproject.toml](pyproject.toml:7)
+2. Commit and push your changes
+3. Create a new release on GitHub with a tag matching the version (e.g., `v0.5.0`)
+4. The GitHub Action will automatically build and publish to PyPI
+
+You can also manually publish with:
+
+```bash
+make upload
+```
