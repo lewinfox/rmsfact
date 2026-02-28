@@ -62,7 +62,7 @@ This will create a virtual environment, install dependencies, and set up the pac
 
 # Making changes
 
-To add a new fact you can edit `rmsfact/data/rmsfact.txt`. The text file is read directly when the package is imported, so no build step is needed.
+To add a new fact you can edit `rmsfact/data/rmsfact.txt`.
 
 ```bash
 echo "A new fact" >> rmsfact/data/rmsfact.txt
