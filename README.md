@@ -9,8 +9,14 @@ site stallmanfacts.com (which is accessible only via <http://archive.org>).
 
 # Installation
 
-``` python
-python -m pip install rmsfact
+```bash
+uv pip install rmsfact
+```
+
+Or with pip:
+
+```bash
+pip install rmsfact
 ```
 
 
@@ -30,48 +36,83 @@ You can also run `python -m rmsfact` from a shell.
 
 # Building from source
 
-In the event you want to build the package from source, clone the repository...
+This project uses [uv](https://github.com/astral-sh/uv) for dependency management and building.
 
-```
+Clone the repository:
+
+```bash
 git clone https://github.com/lewinfox/rmsfact.git
-```
-
-... `cd` into the project directory...
-
-```
 cd rmsfact
 ```
 
-...and install with `make`
+Install uv if you don't have it:
 
-```
-make install
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-This builds the package and then runs `python -m pip install .`
+Set up the development environment:
+
+```bash
+make install_dev
+```
+
+This will create a virtual environment, install dependencies, and set up the package for development.
 
 
 # Making changes
 
 To add a new fact you can edit `rmsfact/data/rmsfact.txt`.
 
-```
+```bash
 echo "A new fact" >> rmsfact/data/rmsfact.txt
 ```
 
-The `Makefile` provides a couple of useful targets, one of which is `make build_binary_data` which
-executes the script `rmsfact/data/build_rms_fact.py` to convert `rmsfact/data/rmsfact.txt` into a
-`.dat` file using `pickle`. This `.dat` file is then read when the package is loaded.
+The `Makefile` provides several useful targets:
 
-Executing `make build` will rebuild the data file and produce the source and binary packages under
-a `dist/` directory. You may need to `python -m pip install build` first.
+* `make install_dev`: Set up development environment with uv
+* `make test`: Run unit tests with pytest
+* `make build`: Build the package (creates source and wheel distributions)
+* `make clean`: Remove build artifacts
+* `make format`: Format code with ruff
+* `make check`: Run linter checks
 
-```
+You can build the package with:
+
+```bash
 make build
 ```
 
-## Other makefile targets
 
-* `make install_dev`: Install with `pip -e`
-* `make test`: Run unit tests
-* `make clean`: Remove build artifacts
+# Releasing to PyPI
+
+This project uses GitHub Actions to automatically publish to PyPI when you create a new GitHub release.
+
+## First-time setup
+
+You need to configure PyPI's Trusted Publishers feature (one-time setup):
+
+1. Go to [PyPI](https://pypi.org/) and log in to your account
+2. Navigate to your project's settings (or create the project first if it doesn't exist)
+3. Go to the "Publishing" section
+4. Add a new publisher with these settings:
+   - **PyPI Project Name**: `rmsfact`
+   - **Owner**: `lewinfox` (your GitHub username)
+   - **Repository name**: `rmsfact`
+   - **Workflow name**: `publish.yml`
+   - **Environment name**: (leave blank)
+
+## Creating a release
+
+Once trusted publishing is configured, simply create a new GitHub release:
+
+1. Update the version in [pyproject.toml](pyproject.toml:7)
+2. Commit and push your changes
+3. Create a new release on GitHub with a tag matching the version (e.g., `v0.5.0`)
+4. The GitHub Action will automatically build and publish to PyPI
+
+You can also manually publish with:
+
+```bash
+make upload
+```
